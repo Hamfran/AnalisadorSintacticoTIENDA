@@ -1,0 +1,28 @@
+package codigo;
+
+import java_cup.runtime.Symbol;
+
+parser code
+{:
+    private Symbol s;
+    
+    public void syntax_error(Symbol s){
+        this.s = s;
+    }
+
+    public Symbol getS(){
+        return this.s;
+    }
+:};
+terminal NombreComprador, CodigoPostal, Ubicacion, Cantidad, Precio, DescripcionArticulo, Guion, ERROR;
+
+non terminal INICIO, LISTA_ARTICULOS, ARTICULO;
+
+start with INICIO;
+
+INICIO ::= LISTA_ARTICULOS;  // Comenzar con una lista de artículos
+
+LISTA_ARTICULOS ::= ARTICULO LISTA_ARTICULOS
+                   | ;
+
+ARTICULO ::= NombreComprador CodigoPostal Ubicacion Cantidad Precio DescripcionArticulo Guion;
